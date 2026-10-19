@@ -1,9 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Budget | MoneyTracker</title><link rel="stylesheet" href="../shared/base.css"><link rel="stylesheet" href="budget.css"></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget | MoneyTracker</title>
+
+    <link rel="stylesheet" href="../shared/base.css">
+    <link rel="stylesheet" href="budget.css">
+</head>
 <body data-page="budget">
-<header><h1>Budget</h1><a class="gear" href="../settings/settings.html">⚙️</a></header>
-<div class="card"><div class="sub">Monthly spending ceiling</div><div class="big" id="base"></div><div class="sub" id="src"></div><div class="sub" id="tot"></div></div>
-<div id="cats"></div>
-<button class="ghost" id="add">+ Add category</button>
-<script src="../shared/store.js"></script><script src="../shared/nav.js"></script><script src="budget.js"></script>
-</body></html>
+
+    <header>
+        <h1>Budget</h1>
+        <a class="gear" href="../settings/settings.html">⚙️</a>
+    </header>
+
+    <!-- Ceiling and allocation total -->
+    <div class="card">
+        <div class="sub">Monthly spending ceiling</div>
+        <div class="big" id="base"></div>
+        <div class="sub" id="src"></div>
+        <div class="sub" id="tot"></div>
+    </div>
+
+    <!-- Editable categories -->
+    <div id="cats"></div>
+
+    <button class="ghost" id="add">+ Add category</button>
+
+    <script src="../shared/store.js"></script>
+    <script src="../shared/nav.js"></script>
+    <script src="budget.js"></script>
+</body>
+</html>

@@ -1,4 +1,42 @@
-.mini{flex:1;margin:0;text-align:center;padding:10px 6px}.mini b{font-size:14px}
-.split{margin-bottom:12px}
-.fab{position:fixed;right:18px;bottom:78px;width:56px;height:56px;border-radius:50%;background:var(--g);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px #0003}
-.bk{margin-bottom:12px}.bk:last-child{margin:0}
+/* Small summary cards */
+.mini {
+    flex: 1;
+    margin: 0;
+    padding: 10px 6px;
+    text-align: center;
+}
+
+.mini b {
+    font-size: 14px;
+}
+
+.split {
+    margin-bottom: 12px;
+}
+
+/* One budget bucket */
+.bk {
+    margin-bottom: 12px;
+}
+
+.bk:last-child {
+    margin-bottom: 0;
+}
+
+/* Floating add button */
+.fab {
+    position: fixed;
+    right: 18px;
+    bottom: 78px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-size: 32px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

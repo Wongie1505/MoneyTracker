@@ -1,2 +1,12 @@
-.nm{flex:1}.pc{width:80px}
-#add{margin-top:4px}
+/* Category name input grows, percentage input stays small */
+.nm {
+    flex: 1;
+}
+
+.pc {
+    width: 80px;
+}
+
+#add {
+    margin-top: 4px;
+}

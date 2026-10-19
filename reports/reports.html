@@ -1,13 +1,48 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reports | MoneyTracker</title><link rel="stylesheet" href="../shared/base.css"><link rel="stylesheet" href="reports.css"></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | MoneyTracker</title>
+
+    <link rel="stylesheet" href="../shared/base.css">
+    <link rel="stylesheet" href="reports.css">
+</head>
 <body data-page="reports">
-<header><h1>Reports</h1><a class="gear" href="../settings/settings.html">⚙️</a></header>
-<div class="row noprint"><input type="month" id="mon"><button id="pdf" style="width:auto;white-space:nowrap">Save as PDF</button></div>
-<h2 id="title"></h2>
-<div class="card"><div class="split"><span>Income</span><b class="pos" id="inc"></b></div>
-<div class="split"><span>Spent</span><b class="neg" id="exp"></b></div>
-<div class="split"><span>Profit / loss</span><b id="pl"></b></div></div>
-<h2>Plan vs actual</h2><div class="card" id="plan"></div>
-<h2>Last 6 months</h2><div class="card"><div class="chart" id="chart"></div><div class="sub">Green: income. Red: spent.</div></div>
-<script src="../shared/store.js"></script><script src="../shared/nav.js"></script><script src="reports.js"></script>
-</body></html>
+
+    <header>
+        <h1>Reports</h1>
+        <a class="gear" href="../settings/settings.html">⚙️</a>
+    </header>
+
+    <!-- Month picker and PDF button (hidden when printing) -->
+    <div class="row noprint">
+        <input type="month" id="mon">
+        <button id="pdf" class="nowrap">Save as PDF</button>
+    </div>
+
+    <h2 id="title"></h2>
+
+    <!-- Monthly summary -->
+    <div class="card">
+        <div class="split"><span>Income</span><b class="pos" id="inc"></b></div>
+        <div class="split"><span>Spent</span><b class="neg" id="exp"></b></div>
+        <div class="split"><span>Profit / loss</span><b id="pl"></b></div>
+    </div>
+
+    <!-- Plan vs actual per category -->
+    <h2>Plan vs actual</h2>
+    <div class="card" id="plan"></div>
+
+    <!-- Six month trend -->
+    <h2>Last 6 months</h2>
+    <div class="card">
+        <div class="chart" id="chart"></div>
+        <div class="sub">Green: income. Red: spent.</div>
+    </div>
+
+    <script src="../shared/store.js"></script>
+    <script src="../shared/nav.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

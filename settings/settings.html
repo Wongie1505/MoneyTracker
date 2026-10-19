@@ -1,12 +1,46 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Settings | MoneyTracker</title><link rel="stylesheet" href="../shared/base.css"><link rel="stylesheet" href="settings.css"></head>
-<body data-page="settings">
-<header><h1>Settings</h1></header>
-<div class="card"><label for="est">Estimated monthly income (MK)</label><input id="est" type="number" min="0"><br><button id="saveEst">Save</button>
-<p class="sub">Used until you have 2 months of real income entries.</p></div>
-<div class="card"><h2>Backup</h2><p class="sub">Your data lives only in this browser. Export regularly.</p><br>
-<button id="exp">Export backup (JSON)</button><br><br>
-<button class="ghost" id="imp">Import backup</button><input type="file" id="file" accept=".json" hidden></div>
-<div class="card"><button class="ghost" id="reset" style="color:var(--r)">Delete all data</button></div>
-<script src="../shared/store.js"></script><script src="settings.js"></script>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | MoneyTracker</title>
+
+    <link rel="stylesheet" href="../shared/base.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+
+    <header>
+        <h1>Settings</h1>
+        <a class="gear" href="../home/home.html">✕</a>
+    </header>
+
+    <!-- Estimated income -->
+    <div class="card">
+        <label for="est">Estimated monthly income (MK)</label>
+        <input id="est" type="number" min="0">
+        <br>
+        <button id="saveEst">Save</button>
+        <p class="sub">Used until you have 2 months of real income entries.</p>
+    </div>
+
+    <!-- Backup -->
+    <div class="card">
+        <h2>Backup</h2>
+        <p class="sub">Your data lives only in this browser. Export regularly.</p>
+        <br>
+        <button id="exp">Export backup (JSON)</button>
+        <br><br>
+        <button id="imp" class="ghost">Import backup</button>
+        <input type="file" id="file" accept=".json" hidden>
+    </div>
+
+    <!-- Danger zone -->
+    <div class="card">
+        <button id="reset" class="ghost danger">Delete all data</button>
+    </div>
+
+    <script src="../shared/store.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>

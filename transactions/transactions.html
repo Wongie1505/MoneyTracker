@@ -1,38 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Transactions | MoneyTracker</title><link rel="stylesheet" href="../shared/base.css"><link rel="stylesheet" href="transactions.css"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions | MoneyTracker</title>
+
+    <link rel="stylesheet" href="../shared/base.css">
+    <link rel="stylesheet" href="transactions.css">
+</head>
 <body data-page="transactions">
-  <header><h1>Transactions</h1><a class="gear" href="../settings/settings.html">⚙️</a></header>
-  <div class="card">
-    <div class="toggle">
-      <button id="tExp">Expense</button>
-      <button id="tInc" class="ghost">Income</button>
-    </div>
-    <label for="amt">Amount (MK)</label>
-      <input id="amt" type="number" inputmode="numeric" min="0">
-    <div id="catWrap">
-      <label for="cat">Category</label>
-      <select id="cat"></select>
+
+    <header>
+        <h1>Transactions</h1>
+        <a class="gear" href="../settings/settings.html">⚙️</a>
+    </header>
+
+    <!-- Add form -->
+    <div class="card">
+        <div class="toggle">
+            <button id="tExp">Expense</button>
+            <button id="tInc" class="ghost">Income</button>
+        </div>
+
+        <label for="amt">Amount (MK)</label>
+        <input id="amt" type="number" inputmode="numeric" min="0">
+
+        <div id="catWrap">
+            <label for="cat">Category</label>
+            <select id="cat"></select>
+        </div>
+
+        <label for="note">Note (optional)</label>
+        <input id="note" placeholder="e.g. maize flour">
+
+        <label for="date">Date</label>
+        <input id="date" type="date">
+
+        <br>
+        <button id="save">Save</button>
     </div>
 
-    <label for="note">Note (optional)</label>
-      <input id="note" placeholder="e.g. maize flour">
-    <label for="date">Date</label>
-      <input id="date" type="date">
-    <br>
-    
-    <button id="save">Save</button>
-    
-  </div>
-  <div class="row">
-    <h2 style="flex:1">History</h2>
-    <input type="month" id="mon" style="width:auto"></div>
-  <div class="card" id="list"></div>
-  <script src="../shared/store.js"></script>
-  <script src="../shared/nav.js"></script>
-  <script src="transactions.js"></script>
+    <!-- History -->
+    <div class="row">
+        <h2 class="grow">History</h2>
+        <input type="month" id="mon" class="auto">
+    </div>
+
+    <div class="card" id="list"></div>
+
+    <script src="../shared/store.js"></script>
+    <script src="../shared/nav.js"></script>
+    <script src="transactions.js"></script>
 </body>
 </html>

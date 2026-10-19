@@ -1,1 +1,4 @@
-
+/* Destructive action stands out in red */
+.danger {
+    color: var(--red);
+}

@@ -1,29 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>MoneyTracker</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | MoneyTracker</title>
+
     <link rel="stylesheet" href="../shared/base.css">
     <link rel="stylesheet" href="onboarding.css">
-  </head>
+</head>
 <body>
-  <header>
-    <h1>MoneyTracker</h1>
-  </header>
-  <div class="card">
-    <h2>Your estimated average monthly income</h2>
-    <p class="sub">Be honest and a bit conservative. The app replaces this with your real average after 2 months of income entries.</p>
-    <label for="inc">Amount (MK)</label>
-    <input id="inc" type="number" inputmode="numeric" min="0" placeholder="e.g. 150000">
-  </div>
-  <div class="card">
-    <h2>Split your income</h2>
-    <p class="sub">Defaults below. Change anything, you can edit later in Budget.</p>
-    <div id="cats"></div>
-    <p id="tot" class="sub"></p>
-  </div>
-  <button id="go">Start</button>
-  <script src="../shared/store.js"></script><script src="onboarding.js"></script>
-  </body>
+
+    <header>
+        <h1>MoneyTracker</h1>
+    </header>
+
+    <!-- Step 1: estimated income -->
+    <div class="card">
+        <h2>Your estimated average monthly income</h2>
+        <p class="sub">
+            Be honest and a bit conservative. The app replaces this with your
+            real average after 2 months of income entries.
+        </p>
+
+        <label for="inc">Amount (MK)</label>
+        <input id="inc" type="number" inputmode="numeric" min="0" placeholder="e.g. 150000">
+    </div>
+
+    <!-- Step 2: split the income into buckets -->
+    <div class="card">
+        <h2>Split your income</h2>
+        <p class="sub">Defaults below. Change anything, you can edit later in Budget.</p>
+
+        <div id="cats"></div>
+        <p id="tot" class="sub"></p>
+    </div>
+
+    <button id="go">Start</button>
+
+    <script src="../shared/store.js"></script>
+    <script src="onboarding.js"></script>
+</body>
 </html>

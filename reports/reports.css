@@ -1,6 +1,65 @@
-.chart{display:flex;gap:6px;align-items:flex-end;height:140px;margin-bottom:6px}
-.col{flex:1;text-align:center;font-size:11px;color:var(--m)}
-.pair{display:flex;gap:2px;align-items:flex-end;height:120px}
-.pair i{flex:1;border-radius:3px 3px 0 0;min-height:1px}
-.pair .a{background:var(--g)}.pair .b{background:var(--r)}
-@media print{.noprint,.tabbar,.gear{display:none}body{background:#fff;padding:0}.card{break-inside:avoid}}
+/* Button that should not wrap its text */
+.nowrap {
+    width: auto;
+    white-space: nowrap;
+}
+
+/* One plan-vs-actual row */
+.pv {
+    margin-bottom: 12px;
+}
+
+/* ---------- Six month bar chart ---------- */
+.chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 140px;
+    margin-bottom: 6px;
+}
+
+.col {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 120px;
+}
+
+.pair i {
+    flex: 1;
+    min-height: 1px;
+    border-radius: 3px 3px 0 0;
+}
+
+.pair .a {
+    background: var(--green);
+}
+
+.pair .b {
+    background: var(--red);
+}
+
+/* ---------- Print / Save as PDF ---------- */
+@media print {
+    .noprint,
+    .tabbar,
+    .gear {
+        display: none;
+    }
+
+    body {
+        background: #fff;
+        padding: 0;
+    }
+
+    .card {
+        break-inside: avoid;
+    }
+}

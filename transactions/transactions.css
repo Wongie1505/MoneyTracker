@@ -1,1 +1,14 @@
-.toggle{display:flex;gap:8px}
+/* Expense / Income switch */
+.toggle {
+    display: flex;
+    gap: 8px;
+}
+
+/* History header helpers */
+.grow {
+    flex: 1;
+}
+
+.auto {
+    width: auto;
+}

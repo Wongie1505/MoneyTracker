@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyTracker</title>
+</head>
+<body>
+    
+    <script>
+        var d=null;
+        try{
+            d=JSON.parse(localStorage.getItem('moneytracker_v1'))
+        }
+        catch(e){}
+
+        location.replace(d&&d.settings&&d.settings.onboarded?'home/home.html':'onboarding/onboarding.html');
+    </script>
+</body>
+</html>

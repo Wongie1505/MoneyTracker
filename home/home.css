@@ -1,0 +1,4 @@
+.mini{flex:1;margin:0;text-align:center;padding:10px 6px}.mini b{font-size:14px}
+.split{margin-bottom:12px}
+.fab{position:fixed;right:18px;bottom:78px;width:56px;height:56px;border-radius:50%;background:var(--g);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px #0003}
+.bk{margin-bottom:12px}.bk:last-child{margin:0}

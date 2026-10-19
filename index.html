@@ -12,17 +12,29 @@
 
     <script>
         // Decide where to send the user: onboarding on first launch, home after that
-        var saved = null;
+        function goToApp() {
+            var saved = null;
 
-        try {
-            saved = JSON.parse(localStorage.getItem('moneytracker_v1'));
-        } catch (e) {
-            // Corrupt or missing data: treat as a new user
+            try {
+                saved = JSON.parse(localStorage.getItem('moneytracker_v1'));
+            } catch (e) {
+                // Corrupt or missing data: treat as a new user
+            }
+
+            var onboarded = saved && saved.settings && saved.settings.onboarded;
+
+            location.replace(onboarded ? 'home/home.html' : 'onboarding/onboarding.html');
         }
 
-        var onboarded = saved && saved.settings && saved.settings.onboarded;
-
-        location.replace(onboarded ? 'home/home.html' : 'onboarding/onboarding.html');
+        // Register the service worker on the start page (PWABuilder checks here),
+        // and only redirect once registration has finished
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('sw.js')
+                .then(goToApp, goToApp);
+        } else {
+            goToApp();
+        }
     </script>
 </body>
 </html>

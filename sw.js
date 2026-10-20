@@ -1,5 +1,5 @@
 // Service worker: precache the app, then network first with cache fallback
-const CACHE_NAME = 'mt-v3';
+const CACHE_NAME = 'mt-v4';
 
 // Every file the app needs to run offline
 const APP_FILES = [

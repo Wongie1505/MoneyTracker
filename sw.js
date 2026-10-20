@@ -1,5 +1,5 @@
 // Service worker: precache the app, then network first with cache fallback
-const CACHE_NAME = 'mt-v2';
+const CACHE_NAME = 'mt-v3';
 
 // Every file the app needs to run offline
 const APP_FILES = [
@@ -33,6 +33,8 @@ const APP_FILES = [
     'icons/apple-touch-icon.png'
 ];
 
+
+// ---------- Install: download every app file into the cache ----------
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
@@ -43,14 +45,19 @@ self.addEventListener('install', function (event) {
     self.skipWaiting();
 });
 
-// Remove old caches when the version changes
+
+// ---------- Activate: remove old caches when the version changes ----------
 self.addEventListener('activate', function (event) {
     event.waitUntil(
         caches.keys().then(function (names) {
             return Promise.all(
                 names
-                    .filter(function (name) { return name !== CACHE_NAME; })
-                    .map(function (name) { return caches.delete(name); })
+                    .filter(function (name) {
+                        return name !== CACHE_NAME;
+                    })
+                    .map(function (name) {
+                        return caches.delete(name);
+                    })
             );
         })
     );
@@ -58,25 +65,40 @@ self.addEventListener('activate', function (event) {
     self.clients.claim();
 });
 
+
+// ---------- Fetch: network first, cache as the offline fallback ----------
 self.addEventListener('fetch', function (event) {
-    if (event.request.method !== 'GET') {
+    const request = event.request;
+
+    // Only handle normal GET requests to http(s) URLs.
+    // This skips chrome-extension:// and other schemes the Cache API rejects.
+    if (request.method !== 'GET' || !request.url.startsWith('http')) {
         return;
     }
 
     event.respondWith(
-        fetch(event.request)
+        fetch(request)
             .then(function (response) {
-                // Keep a fresh copy for offline use
-                var copy = response.clone();
+                // Only keep good responses from our own site
+                const sameOrigin = new URL(request.url).origin === self.location.origin;
 
-                caches.open(CACHE_NAME).then(function (cache) {
-                    cache.put(event.request, copy);
-                });
+                if (response.ok && sameOrigin) {
+                    const copy = response.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then(function (cache) {
+                            return cache.put(request, copy);
+                        })
+                        .catch(function () {
+                            // Ignore: caching is a bonus, not required
+                        });
+                }
 
                 return response;
             })
             .catch(function () {
-                return caches.match(event.request);
+                // Offline: fall back to the cached copy
+                return caches.match(request);
             })
     );
 });

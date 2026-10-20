@@ -26,15 +26,7 @@
             location.replace(onboarded ? 'home/home.html' : 'onboarding/onboarding.html');
         }
 
-        // Register the service worker on the start page (PWABuilder checks here),
-        // and only redirect once registration has finished
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('sw.js')
-                .then(goToApp, goToApp);
-        } else {
-            goToApp();
-        }
+        
     </script>
 </body>
 </html>

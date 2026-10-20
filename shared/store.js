@@ -5,6 +5,17 @@
  * Every total and average is calculated from them, never saved.
  */
 
+
+// Register the service worker from a shared script so every page does it.
+// The path is resolved from this file, so it works on localhost and under /SaveMoney/.
+if ('serviceWorker' in navigator) {
+    const swUrl = new URL('../sw.js', document.currentScript.src);
+
+    navigator.serviceWorker.register(swUrl);
+}
+
+
+
 // Shortcut for document.getElementById
 const $ = function (id) {
     return document.getElementById(id);

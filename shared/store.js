@@ -6,14 +6,14 @@
  */
 
 
-// Register the service worker from a shared script so every page does it.
+// Register the service worker from a shared script so every inner page does it too.
 // The path is resolved from this file, so it works on localhost and under /SaveMoney/.
-if ('serviceWorker' in navigator) {
+// Registering the same worker twice (index.html also does it) is harmless.
+if ('serviceWorker' in navigator && document.currentScript) {
     const swUrl = new URL('../sw.js', document.currentScript.src);
 
     navigator.serviceWorker.register(swUrl);
 }
-
 
 
 // Shortcut for document.getElementById
@@ -65,6 +65,7 @@ const MT = (function () {
     // Today as YYYY-MM-DD in the user's local time
     function today() {
         const offset = new Date().getTimezoneOffset() * 60000;
+
         return new Date(Date.now() - offset).toISOString().slice(0, 10);
     }
 
@@ -124,6 +125,7 @@ const MT = (function () {
         data.transactions.forEach(function (t) {
             if (t.type === 'income' && month(t.date) < m) {
                 const key = month(t.date);
+
                 incomeByMonth[key] = (incomeByMonth[key] || 0) + t.amount;
             }
         });
@@ -171,6 +173,7 @@ const MT = (function () {
         const colour = isIncome ? 'pos' : 'neg';
 
         let deleteBtn = '';
+
         if (showDelete) {
             deleteBtn = '<button class="x" data-id="' + t.id + '">✕</button>';
         }
@@ -220,11 +223,6 @@ const MT = (function () {
     function reset() {
         data = structuredClone(DEFAULT_DATA);
         save();
-    }
-
-    // ---------- Offline support (only works when hosted) ----------
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-        navigator.serviceWorker.register('../sw.js');
     }
 
     // ---------- Public API ----------

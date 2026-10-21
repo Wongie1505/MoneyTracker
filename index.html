@@ -43,11 +43,11 @@
                 <strong id="weeklyIncome">MWK 0</strong>
             </div>
             <div class="stat">
-                <span id="spending">Spent this week</span>
+                <span>Spent this week</span>
                 <strong id="weeklyExpenses">MWK 0</strong>
             </div>
             <div class="stat">
-                <span>Net this week</span>
+                <span id="spending">Net this week</span>
                 <strong id="weeklyNet">MWK 0</strong>
             </div>
         </section>
@@ -180,5 +180,12 @@
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script src="app.js"></script>
+
+    <!-- Offline support: register the service worker -->
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
 </body>
 </html>

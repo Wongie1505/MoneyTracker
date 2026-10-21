@@ -759,13 +759,6 @@ if ('Notification' in window && Notification.permission === 'default') {
     }, { once: true });
 }
 
-// Offline support
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').catch(function () {
-        // Not available (for example when opened as a plain file)
-    });
-}
-
 render();
 checkReminder();
 setInterval(checkReminder, 60000);

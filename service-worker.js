@@ -1,6 +1,6 @@
 // Precache the app, then use the network first and fall back to the cache offline.
 // Change CACHE when you update files so old copies are removed.
-const CACHE = 'money-tracker-v2';
+const CACHE = 'money-tracker-v5';
 
 const FILES = [
     './',
@@ -46,18 +46,27 @@ self.addEventListener('activate', function (event) {
 
 // Network first so updates show up, cache when offline
 self.addEventListener('fetch', function (event) {
-    if (event.request.method !== 'GET') {
+    const url = new URL(event.request.url);
+
+    // Only handle GET requests for this app's own files.
+    // This skips browser extensions (chrome-extension://) and other sites.
+    if (event.request.method !== 'GET' || url.origin !== self.location.origin) {
         return;
     }
 
     event.respondWith(
         fetch(event.request)
             .then(function (response) {
-                const copy = response.clone();
+                // Only keep good responses
+                if (response.ok) {
+                    const copy = response.clone();
 
-                caches.open(CACHE).then(function (cache) {
-                    cache.put(event.request, copy);
-                });
+                    caches.open(CACHE).then(function (cache) {
+                        return cache.put(event.request, copy);
+                    }).catch(function () {
+                        // Could not cache this request, ignore it
+                    });
+                }
 
                 return response;
             })

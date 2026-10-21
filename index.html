@@ -1,50 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyTracker</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1f8a4c">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-    <link rel="icon" href="icons/icon-192.png">
-</head>
+    <meta name="theme-color" content="#f5f3ef">
+    <meta name="description" content="A simple offline personal money tracker for Malawi Kwacha.">
 
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Money Tracker</title>
+</head>
 <body>
 
-    <noscript>MoneyTracker needs JavaScript to run.</noscript>
+    <main class="app-shell">
 
-    <script>
-        // Decide where to send the user: onboarding on first launch, home after that
-        function goToApp() {
-            var saved = null;
+        <!-- Top bar -->
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">PERSONAL FINANCE</p>
+                <h1>Money Tracker</h1>
+            </div>
+            <button id="installButton" class="button button-small button-muted hidden" type="button">Install</button>
+        </header>
 
-            try {
-                saved = JSON.parse(localStorage.getItem('moneytracker_v1'));
-            } catch (e) {
-                // Corrupt or missing data: treat as a new user
-            }
+        <!-- Current balance -->
+        <section class="balance-card" aria-labelledby="balanceHeading">
+            <div>
+                <p id="balanceHeading" class="label">Current balance</p>
+                <p id="balance" class="balance">MWK 0</p>
+                <p id="balanceHint" class="subtle">Add your starting balance below.</p>
+            </div>
+            <div class="balance-mark" aria-hidden="true">MWK</div>
+        </section>
 
-            var onboarded = saved && saved.settings && saved.settings.onboarded;
+        <!-- This week at a glance -->
+        <section class="quick-stats" aria-label="This week's summary">
+            <div class="stat">
+                <span>Income this week</span>
+                <strong id="weeklyIncome">MWK 0</strong>
+            </div>
+            <div class="stat">
+                <span id="spending">Spent this week</span>
+                <strong id="weeklyExpenses">MWK 0</strong>
+            </div>
+            <div class="stat">
+                <span>Net this week</span>
+                <strong id="weeklyNet">MWK 0</strong>
+            </div>
+        </section>
 
-            location.replace(onboarded ? 'home/home.html' : 'onboarding/onboarding.html');
-        }
+        <!-- Quick entry form -->
+        <section class="panel entry-panel" aria-labelledby="entryHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">QUICK ENTRY</p>
+                    <h2 id="entryHeading">Where did money go?</h2>
+                </div>
 
-        // Register the service worker on the root page first, so it always happens
-        // before the redirect. A failed registration must never block the app.
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('sw.js')
-                .catch(function () {
-                    // Ignore: the app still works online without it
-                })
-                .then(goToApp);
-        } else {
-            goToApp();
-        }
-    </script>
+                <div class="type-toggle" role="group" aria-label="Transaction type">
+                    <button class="type-button active" data-type="expense" type="button">Expense</button>
+                    <button class="type-button" data-type="income" type="button">Income</button>
+                </div>
+            </div>
 
+            <form id="transactionForm">
+                <div class="form-grid">
+                    <label><span id="titleLabel">What was it for?</span>
+                        <input id="title" name="title" type="text" placeholder="e.g. lunch, airtime" required autocomplete="off">
+                    </label>
+
+                    <label>Amount (MWK)
+                        <input id="amount" name="amount" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0" required>
+                    </label>
+
+                    <label><span id="categoryLabel">Category</span>
+                        <select id="category" name="category"></select>
+                    </label>
+
+                    <button class="button button-primary form-submit" type="submit">Add transaction</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 10-15-70 budget for this month -->
+        <section class="panel" aria-labelledby="budgetHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">10 · 15 · 70 BUDGET</p>
+                    <h2 id="budgetHeading">This month</h2>
+                </div>
+                <span id="monthName" class="subtle"></span>
+            </div>
+
+            <div id="budgetList" class="budget-list"></div>
+            <p id="budgetSummary" class="subtle budget-summary"></p>
+        </section>
+
+        <!-- Recent transactions -->
+        <section class="panel" aria-labelledby="recentHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">ACTIVITY</p>
+                    <h2 id="recentHeading">Recent transactions</h2>
+                </div>
+                <button id="clearButton" class="text-button" type="button">Clear all</button>
+            </div>
+
+            <div id="transactions" class="transactions">
+                <p class="empty">No transactions yet.</p>
+            </div>
+        </section>
+
+        <!-- Weekly category breakdown -->
+        <section class="panel" aria-labelledby="weeklyHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">AWARENESS</p>
+                    <h2 id="weeklyHeading">This week</h2>
+                </div>
+                <span id="weekRange" class="subtle"></span>
+            </div>
+
+            <div id="weekPie" class="pie hidden" role="img" aria-label="Pie chart of this week's expenses by category"></div>
+            <div id="categoryBreakdown" class="breakdown">
+                <p class="empty">Add expenses to see your categories.</p>
+            </div>
+        </section>
+
+        <!-- Earlier weeks at a glance -->
+        <section class="panel" aria-labelledby="historyHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">HISTORY</p>
+                    <h2 id="historyHeading">Previous weeks</h2>
+                </div>
+            </div>
+
+            <div id="weekHistory" class="history"></div>
+        </section>
+
+        <!-- Settings and data -->
+        <section class="panel settings-panel" aria-labelledby="settingsHeading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR DATA</p>
+                    <h2 id="settingsHeading">Settings</h2>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="monthlyIncomeButton" class="button button-muted" type="button">Set monthly income</button>
+                <button id="startingBalanceButton" class="button button-muted" type="button">Set starting balance</button>
+                <button id="exportJsonButton" class="button button-muted" type="button">Export JSON</button>
+                <button id="exportCsvButton" class="button button-muted" type="button">Export CSV</button>
+
+                <label class="button button-muted file-button">Import JSON/CSV
+                    <input id="importFile" type="file" accept=".json,.csv,application/json,text/csv">
+                </label>
+            </div>
+
+            <p class="subtle settings-note">
+                Your data stays on this device. The app works offline after the first load.
+                Export a JSON backup regularly.
+            </p>
+        </section>
+
+        <footer>
+            <span id="offlineStatus">Offline-ready</span>
+            <span>·</span>
+            <span>MWK</span>
+        </footer>
+
+    </main>
+
+    <!-- Small pop-up message -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
 </body>
-
 </html>

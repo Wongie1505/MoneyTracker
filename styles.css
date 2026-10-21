@@ -1,0 +1,555 @@
+/* ---------- Base ---------- */
+:root {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #252522;
+    background: #f5f3ef;
+    line-height: 1.45;
+    font-synthesis: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f3ef;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ---------- Layout ---------- */
+.app-shell {
+    width: min(100% - 32px, 760px);
+    margin: 0 auto;
+    padding: 28px 0 40px;
+}
+
+.topbar,
+.section-heading,
+.settings-actions,
+.quick-stats,
+footer {
+    display: flex;
+    align-items: center;
+}
+
+.topbar {
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.topbar h1,
+h2 {
+    margin: 0;
+    letter-spacing: -0.04em;
+}
+
+.topbar h1 {
+    font-size: 1.65rem;
+}
+
+h2 {
+    font-size: 1.18rem;
+}
+
+.section-heading {
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+/* ---------- Text ---------- */
+.eyebrow {
+    margin: 0 0 5px;
+    color: #77746d;
+    font-size: 0.69rem;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+}
+
+.label,
+.subtle {
+    color: #77746d;
+    font-size: 0.84rem;
+}
+
+.label {
+    margin: 0 0 6px;
+}
+
+.subtle {
+    margin: 0;
+}
+
+.empty {
+    margin: 4px 0;
+    color: #99958b;
+    font-size: 0.84rem;
+}
+
+/* ---------- Balance card ---------- */
+.balance-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-radius: 18px;
+    background: #2e302d;
+    color: #f8f7f3;
+    box-shadow: 0 7px 24px #24251e14;
+}
+
+.balance-card .label,
+.balance-card .subtle {
+    color: #c5c6bd;
+}
+
+.balance {
+    margin: 0;
+    font-size: clamp(2.1rem, 8vw, 3.2rem);
+    font-weight: 750;
+    letter-spacing: -0.06em;
+}
+
+.balance.low {
+    color: #e89985;
+}
+
+.balance-mark {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border: 1px solid #ffffff38;
+    border-radius: 50%;
+    color: #d9d9d0;
+    font-size: 0.72rem;
+    font-weight: 750;
+}
+
+/* ---------- Weekly stats ---------- */
+.quick-stats {
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.stat {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #e0ddd6;
+    border-radius: 13px;
+    background: #fbfaf8;
+}
+
+.stat span {
+    display: block;
+    color: #77746d;
+    font-size: 0.75rem;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 1rem;
+}
+
+/* ---------- Panels ---------- */
+.panel {
+    margin-top: 14px;
+    padding: 21px;
+    border: 1px solid #e0ddd6;
+    border-radius: 16px;
+    background: #fbfaf8;
+}
+
+/* ---------- Expense / income switch ---------- */
+.type-toggle {
+    display: flex;
+    padding: 3px;
+    background: #eeece7;
+    border-radius: 9px;
+}
+
+.type-button {
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 7px;
+    color: #77746d;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+.type-button.active {
+    color: #252522;
+    background: #fff;
+    box-shadow: 0 1px 3px #00000012;
+}
+
+/* ---------- Form ---------- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+}
+
+label {
+    display: block;
+    color: #5c5a54;
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+input,
+select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 11px 12px;
+    border: 1px solid #d8d5ce;
+    border-radius: 9px;
+    color: #252522;
+    background: #fff;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #73756a;
+    box-shadow: 0 0 0 3px #73756a18;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 14px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.button-primary {
+    color: #fff;
+    background: #545b4d;
+}
+
+.button-primary:hover {
+    background: #42483e;
+}
+
+.button-muted {
+    color: #45453f;
+    background: #eceae4;
+}
+
+.button-muted:hover {
+    background: #e2dfd7;
+}
+
+.button-small {
+    padding: 8px 11px;
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    color: #77746d;
+    background: none;
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+/* ---------- Budget ---------- */
+.budget-list {
+    display: grid;
+    gap: 16px;
+}
+
+.budget-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.82rem;
+}
+
+.budget-note {
+    margin: 4px 0 0;
+    color: #8a877e;
+    font-size: 0.72rem;
+}
+
+.budget-summary {
+    margin-top: 16px;
+    font-size: 0.78rem;
+}
+
+/* ---------- Transactions ---------- */
+.transactions {
+    display: grid;
+    gap: 4px;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #ebe9e3;
+}
+
+.transaction:last-child {
+    border-bottom: 0;
+}
+
+.transaction-info {
+    min-width: 0;
+}
+
+.transaction-title {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 650;
+}
+
+.transaction-meta {
+    margin: 3px 0 0;
+    color: #8a877e;
+    font-size: 0.75rem;
+}
+
+.transaction-right {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.transaction-amount {
+    font-weight: 750;
+}
+
+.income {
+    color: #55705a;
+}
+
+.expense {
+    color: #81574e;
+}
+
+.delete-button {
+    display: block;
+    margin: 3px 0 0 auto;
+    padding: 0;
+    border: 0;
+    color: #aaa59b;
+    background: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+
+/* ---------- Bars (weekly breakdown and budget) ---------- */
+.breakdown {
+    display: grid;
+    gap: 10px;
+}
+
+.breakdown-row {
+    display: grid;
+    grid-template-columns: 12px 1fr auto 44px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.bar {
+    display: block;
+    height: 7px;
+    margin-top: 6px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e7e4dd;
+}
+
+.bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #868d79;
+}
+
+/* Budget limit passed */
+.bar i.over {
+    background: #b5584a;
+}
+
+/* Giving or savings target reached */
+.bar i.done {
+    background: #55705a;
+}
+
+/* ---------- Pie chart ---------- */
+.pie {
+    width: 180px;
+    height: 180px;
+    margin: 4px auto 22px;
+    border-radius: 50%;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend-pct {
+    color: #77746d;
+    text-align: right;
+}
+
+/* ---------- Previous weeks ---------- */
+.history {
+    display: grid;
+}
+
+.history-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #ebe9e3;
+}
+
+.history-row:last-child {
+    border-bottom: 0;
+}
+
+.history-range {
+    font-size: 0.88rem;
+    font-weight: 650;
+}
+
+.history-nums {
+    display: grid;
+    gap: 2px;
+    text-align: right;
+    font-size: 0.78rem;
+}
+
+/* ---------- Settings ---------- */
+.settings-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.file-button {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.file-button input {
+    display: none;
+}
+
+.settings-note {
+    margin-top: 14px;
+}
+
+/* ---------- Footer and toast ---------- */
+footer {
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    color: #99958b;
+    font-size: 0.72rem;
+}
+
+.toast {
+    position: fixed;
+    right: 16px;
+    bottom: 18px;
+    max-width: calc(100% - 32px);
+    padding: 11px 14px;
+    border-radius: 9px;
+    color: #fff;
+    background: #30332e;
+    box-shadow: 0 8px 25px #0002;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 650px) {
+    .app-shell {
+        width: min(100% - 24px, 760px);
+        padding-top: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-grid label:first-child,
+    .form-submit {
+        grid-column: 1 / -1;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .balance-card {
+        padding: 21px;
+    }
+
+    .quick-stats {
+        align-items: stretch;
+    }
+
+    .stat {
+        padding: 12px;
+    }
+
+    .stat strong {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .type-button {
+        padding-inline: 7px;
+    }
+
+    .balance {
+        font-size: 2rem;
+    }
+}
+
+#weeklyExpenses{
+    color: red
+}
+#spending{
+    color:red
+}
